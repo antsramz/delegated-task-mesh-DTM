@@ -1,0 +1,37 @@
+{
+  "template_name": "Delegated Task Mesh (DTM)",
+  "description": "A machine-only mesh for distributing tasks across multiple agents with deterministic routing.",
+  "inputs": {
+    "task_packet": {
+      "type": "object",
+      "description": "The task to be delegated, including metadata and constraints."
+    },
+    "agent_registry": {
+      "type": "list",
+      "description": "List of available agents with capabilities and load."
+    },
+    "routing_rules": {
+      "type": "list",
+      "description": "Deterministic rules for selecting the correct agent."
+    }
+  },
+  "workflow": [
+    {
+      "step": "evaluate_agents",
+      "action": "System evaluates all agents based on capabilities, load, and routing rules."
+    },
+    {
+      "step": "select_agent",
+      "action": "The best-fit agent is selected deterministically."
+    },
+    {
+      "step": "delegate",
+      "action": "Task packet is forwarded to the selected agent."
+    },
+    {
+      "step": "return_confirmation",
+      "action": "Mesh returns a machine-readable confirmation of delegation."
+    }
+  ],
+  "output_format": "json"
+}
